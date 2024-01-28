@@ -190,6 +190,10 @@ objectPool.warningLimit = 100000;
 You can send all objects back to the garbage collector by calling `clear()`. This would be the case when you're done with a game scene, and perhaps you no longer need one particular type of object. When that happens, you can clear its ObjectPool.
 Note that you don't really need to call that. Deleting the ObjectPool itself and let the garbage collector handle it has the same effect. 
 
+## Some pools out of the box
+
+- `MapPool<K, V>`: An object pool that retrieves Maps. Specify key and value as you would specify for instantiating a map.
+
 # Prerequisite
 
 ## Install bun

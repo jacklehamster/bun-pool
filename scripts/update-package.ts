@@ -45,6 +45,7 @@ function getRepoUrl() {
 }
 
 async function getRepoDescription(owner: string, repo: string): Promise<string | null> {
+  console.log(owner, repo);
   try {
     const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
     const data: any = await response.json();

@@ -2,7 +2,7 @@
   "name": "bun-pool",
   "module": "src/index.ts",
   "description": "This typescript library provides an object pool that's flexible and usable for any type of objects. It's written using bun, that's why it's called bun-pool.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "keywords": [
     "bun",
     "typescript"

@@ -4,7 +4,7 @@ export type InitCall<T, A extends any[] = []> = (elem: T | undefined, ...params:
 export type RecycleCallback<T> = (elem: T) => void;
 
 export class ObjectPool<T, A extends any[] = []> implements ItemPool<T, A> {
-  static warningLimit = 50000;
+  warningLimit = 50000;
 
   readonly #usedObjects = new Set<T>();
   readonly #recycler: T[] = [];
@@ -20,19 +20,18 @@ export class ObjectPool<T, A extends any[] = []> implements ItemPool<T, A> {
     }
     const elem = this.initCall(undefined, ...params);
     this.#usedObjects.add(elem);
-    this.checkObjectExistence();
+    this.#checkObjectExistence();
     return elem;
   }
 
   recycle(element: T): undefined {
     this.#usedObjects.delete(element);
-    this.#recycler.push(element);
-    this.onRecycle?.(element);
+    this.#addToRecycler(element);
   }
 
   recycleAll() {
     for (const elem of this.#usedObjects) {
-      this.#recycler.push(elem);
+      this.recycle(elem);
     }
     this.#usedObjects.clear();
   }
@@ -43,8 +42,17 @@ export class ObjectPool<T, A extends any[] = []> implements ItemPool<T, A> {
     this.#usedObjects.clear();
   }
 
-  private checkObjectExistence() {
-    if (this.#usedObjects.size + this.#recycler.length === ObjectPool.warningLimit) {
+  countObjectsInExistence() {
+    return this.#usedObjects.size + this.#recycler.length;
+  }
+
+  #addToRecycler(element: T) {
+    this.#recycler.push(element);
+    this.onRecycle?.(element);
+  }
+
+  #checkObjectExistence() {
+    if (this.countObjectsInExistence() === this.warningLimit) {
       console.warn("ObjectPool already created", this.#usedObjects.size + this.#recycler.length, "in", this.constructor.name);
     }
   }

@@ -5,11 +5,11 @@ export declare class ObjectPool<T, A extends any[] = []> implements ItemPool<T, 
     #private;
     private initCall;
     private onRecycle?;
-    static warningLimit: number;
+    warningLimit: number;
     constructor(initCall: InitCall<T, A>, onRecycle?: RecycleCallback<T> | undefined);
     create(...params: A): T;
     recycle(element: T): undefined;
     recycleAll(): void;
     clear(): void;
-    private checkObjectExistence;
+    countObjectsInExistence(): number;
 }

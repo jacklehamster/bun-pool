@@ -1,7 +1,7 @@
 {
   "name": "bun-pool",
   "module": "src/index.ts",
-  "description": "",
+  "description": "This typescript library provides an object pool that's flexible and usable for any type of objects. It's written using bun, that's why it's called bun-pool.",
   "version": "1.0.0",
   "keywords": [
     "bun",
@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git@github.com:jacklehamster/bun-pool.git"
   },
-  "homepage": "<INSERT HOMEPAGE>",
+  "homepage": "<fill in homepage>",
   "author": {
     "name": "Jack Le Hamster",
     "email": "jacklehamster@gmail.com"

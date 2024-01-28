@@ -34,13 +34,39 @@ function getAuthorName() {
   }
 }
 
+function getRepoOwner(repoUrl: string): string {
+  const match = repoUrl.match(/[:/]([^/]+)\/([^/]+)(\.git)?$/);
+  return match?.[1] ?? "";
+}
+
 function getRepoUrl() {
   try {
     // Get the HTTPS URL of the origin repository
     const repoUrl = execSync('git remote get-url origin').toString().trim();
     return repoUrl;
   } catch (error) {
-    return new Error('Error retrieving repository URL:', error.message);
+    throw new Error('Error retrieving repository URL:', error.message);
+  }
+}
+
+async function getRepoDetails(owner: string, repo: string) {
+  try {
+    const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
+    const data: any = await response.json();
+
+    if (response.ok) {
+      return {
+        description: data.description || null,
+        owner: data.owner ? { id: data.owner.id } : null,
+        homepage: data.homepage || null,
+      };
+    } else {
+      console.error(`Failed to fetch repository details: ${data.message}`);
+      return null;
+    }
+  } catch (error) {
+    console.error('Error fetching repository details:', error.message);
+    return null;
   }
 }
 
@@ -68,6 +94,8 @@ async function updatePackage() {
   const repoName = getRepoName();
   const repoAuthor = getAuthorName();
   const repoEmail = getAuthorEmail();
+  const repoUrl = getRepoUrl();
+  const repoDetails = await getRepoDetails(getRepoOwner(repoUrl), repoName);
 
   const pkg = JSON.parse(await file.text());
   if (pkg.name !== repoName) {
@@ -79,9 +107,8 @@ async function updatePackage() {
     name: repoAuthor,
     email: repoEmail,
   };
-
-  const repoDescription = await getRepoDescription(repoAuthor, repoName);
-  console.log(repoDescription);
+  pkg.description = repoDetails?.description ?? "<fill in description>";
+  pkg.homepage = repoDetails?.homepage ?? "<fill in homepage>";
 
   await Bun.write(file, JSON.stringify(pkg, null, "  ") + "\n");
   console.log(pkg);

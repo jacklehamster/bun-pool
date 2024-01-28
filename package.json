@@ -1,15 +1,15 @@
 {
-  "name": "bun-template",
+  "name": "bun-pool",
   "module": "src/index.ts",
   "description": "<INSERT DESCRIPTION>",
-  "version": "1.0.23",
+  "version": "1.0.0",
   "keywords": [
     "bun",
     "typescript"
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:jacklehamster/bun-template.git"
+    "url": "https://github.com/jacklehamster/bun-pool.git"
   },
   "homepage": "<INSERT HOMEPAGE>",
   "author": {
@@ -27,7 +27,7 @@
     "tsc": "tsc",
     "start": "bun run index.ts",
     "test": "bun test",
-    "build": "bun scripts/update-package.ts && rm -rf dist/*.* && bun run bundler/bundler.ts && bun run test && bun run build:declaration",
+    "build": "bun i && bun scripts/update-package.ts && rm -rf dist/*.* && bun run bundler/bundler.ts && bun run test && bun run build:declaration",
     "build:declaration": "tsc --emitDeclarationOnly --project tsconfig.types.json",
     "build:example": "cd example && bun run build && cd ..",
     "list": "bun run samples/list-scripts.tsx",

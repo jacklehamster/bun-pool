@@ -44,10 +44,30 @@ function getRepoUrl() {
   }
 }
 
+async function getRepoDescription(owner: string, repo: string): Promise<string | null> {
+  try {
+    const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
+    const data: any = await response.json();
+
+    if (response.ok) {
+      return data.description || null;
+    } else {
+      console.error(`Failed to fetch repository details: ${data.message}`);
+      return null;
+    }
+  } catch (error) {
+    console.error('Error fetching repository details:', error.message);
+    return null;
+  }
+}
+
 async function updatePackage() {
   const file = Bun.file('package.json');
 
   const repoName = getRepoName();
+  const repoAuthor = getAuthorName();
+  const repoEmail = getAuthorEmail();
+
   const pkg = JSON.parse(await file.text());
   if (pkg.name !== repoName) {
     pkg.name = repoName;
@@ -55,9 +75,13 @@ async function updatePackage() {
   }
   pkg.repository.url = getRepoUrl();
   pkg.author = {
-    name: getAuthorName(),
-    email: getAuthorEmail(),
+    name: repoAuthor,
+    email: repoEmail,
   };
+
+  const repoDescription = await getRepoDescription(repoAuthor, repoName);
+  console.log(repoDescription);
+
   await Bun.write(file, JSON.stringify(pkg, null, "  ") + "\n");
   console.log(pkg);
 }

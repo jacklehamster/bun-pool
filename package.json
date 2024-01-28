@@ -1,7 +1,7 @@
 {
   "name": "bun-pool",
   "module": "src/index.ts",
-  "description": "<INSERT DESCRIPTION>",
+  "description": "",
   "version": "1.0.0",
   "keywords": [
     "bun",
@@ -9,7 +9,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/jacklehamster/bun-pool.git"
+    "url": "git@github.com:jacklehamster/bun-pool.git"
   },
   "homepage": "<INSERT HOMEPAGE>",
   "author": {

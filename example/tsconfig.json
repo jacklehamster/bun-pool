@@ -20,6 +20,6 @@
     "types": [ "bun-types" ]
   },
   "include": [
-    "**/*.ts",
+    "**/*.ts"
   ]
 }

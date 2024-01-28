@@ -185,13 +185,6 @@ objectPool.warningLimit = 100000;
 - If you know you will need more than 50000 objects at a time, you can increase that limit.
 - If you work with very little objects, perhaps ~10-20 at a time, it will take a while before you reach the limit. You could set the limit to 100, so you'll know immediately that you did something wrong with the ObjectPool.
 
-## Add your own implementation
-
-If you use the "ItemPool" interface to declare ObjectPool variables, you can then replace its implementation with something else. Perhaps you've come up with an implementation with better monitoring, or perhaps you have a specific usecase that requires to use your own.
-You could also extend ObjectPool if you just want to overwrite certain methods.
-
-You could also test replacing ObjectPool with a version that doesn't recycle items, and see if performance really suffers. That will help you determine its effectiveness for your use case.
-
 ## Clear memory
 
 You can send all objects back to the garbage collector by calling `clear()`. This would be the case when you're done with a game scene, and perhaps you no longer need one particular type of object. When that happens, you can clear its ObjectPool.

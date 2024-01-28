@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, jest } from 'bun:test';
+import { beforeEach, describe, expect, it } from 'bun:test';
 import { ObjectPool } from "./ObjectPool";
 
 describe('ObjectPool', () => {

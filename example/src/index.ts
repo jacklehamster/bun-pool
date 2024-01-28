@@ -1,3 +1,3 @@
-import { hello } from "bun-template";
+import { ObjectPool } from "bun-template";
 
-export { hello };
+export { ObjectPool };

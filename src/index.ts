@@ -1,3 +1,3 @@
-export function hello() {
-  return "Hello World!";
-}
+import { ObjectPool } from "./pool/ObjectPool";
+
+export { ObjectPool };

@@ -1,19 +1,21 @@
 import { ObjectPool } from "bun-template";
 import Bao from "baojs";
 import serveStatic from "serve-static-bun";
+import { ItemPool } from "bun-template";
 
 const app = new Bao();
 
-const pool = new ObjectPool<string[]>(elem => {
+const pool: ItemPool<string[], [string]> = new ObjectPool((elem, str) => {
   if (!elem) {
-    return [];
+    return [str];
   }
-  elem.length = 0;
+  elem.length = 1;
+  elem[0] = str;
   return elem;
 });
-console.log(pool.create());
+console.log(pool.create("test"));
 pool.recycleAll();
-console.log(pool.create());
+console.log(pool.create("test2"));
 
 
 app.get("/*any", serveStatic("/", { middlewareMode: "bao" }));

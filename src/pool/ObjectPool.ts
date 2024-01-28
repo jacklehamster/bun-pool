@@ -1,7 +1,9 @@
+import { ItemPool } from "./ItemPool";
+
 type InitCall<T, A extends any[] = []> = (elem: T | undefined, ...params: A) => T;
 type RecycleCallback<T> = (elem: T) => void;
 
-export class ObjectPool<T, A extends any[] = []> {
+export class ObjectPool<T, A extends any[] = []> implements ItemPool<T, A> {
   warningLimit = 50000;
 
   readonly #usedObjects = new Set<T>();

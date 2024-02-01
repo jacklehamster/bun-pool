@@ -31,7 +31,7 @@ export class ObjectPool<T, A extends any[] = []> implements ItemPool<T, A> {
 
   recycleAll() {
     for (const elem of this.#usedObjects) {
-      this.recycle(elem);
+      this.#addToRecycler(elem);
     }
     this.#usedObjects.clear();
   }

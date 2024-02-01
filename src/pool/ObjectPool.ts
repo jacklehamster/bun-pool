@@ -16,6 +16,7 @@ export class ObjectPool<T, A extends any[] = []> implements ItemPool<T, A> {
   create(...params: A): T {
     const recycledElem = this.#recycler.pop();
     if (recycledElem) {
+      this.#usedObjects.add(recycledElem);
       return this.initCall(recycledElem, ...params);
     }
     const elem = this.initCall(undefined, ...params);

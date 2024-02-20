@@ -55,7 +55,7 @@ describe('ObjectPool', () => {
   it('test perf', async () => {
     const p = performance.now();
     const start = performance.now();
-    for (let i = 0; i < 10000; i++) {
+    for (let i = 0; i < 100000; i++) {
       const a = pool.create("one", 1);
       const b = pool.create("two", 2);
       pool.recycle(a);
@@ -63,6 +63,6 @@ describe('ObjectPool', () => {
       pool.recycle(b);
       pool.recycle(c);
     }
-    console.info("Time taken: ", performance.now() - start);
+    console.info("Time taken: ", performance.now() - start, "ms");
   });
 });

@@ -51,4 +51,18 @@ describe('ObjectPool', () => {
     pool.create("five", 5);
     expect(countCreated).toEqual(5);
   });
+
+  it('test perf', async () => {
+    const p = performance.now();
+    const start = performance.now();
+    for (let i = 0; i < 10000; i++) {
+      const a = pool.create("one", 1);
+      const b = pool.create("two", 2);
+      pool.recycle(a);
+      const c = pool.create("three", 3);
+      pool.recycle(b);
+      pool.recycle(c);
+    }
+    console.info("Time taken: ", performance.now() - start);
+  });
 });

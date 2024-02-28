@@ -1,4 +1,9 @@
 # bun-pool
+
+[![npm version](https://badge.fury.io/js/bun-pool.svg)](https://www.npmjs.com/package/bun-pool)
+
+![](https://jacklehamster.github.io/bun-pool/icon.png)
+
 This typescript library provides an object pool that's flexible and usable for any type of objects. It's written using bun, that's why it's called bun-pool.
 
 ![](https://jacklehamster.github.io/bun-pool/icon.png)

@@ -1,0 +1,25 @@
+{
+  "fileCounts": {
+    "src/pool/ItemPool.ts": {
+      "correctCount": 11,
+      "totalCount": 11
+    },
+    "src/pool/ObjectPool.ts": {
+      "correctCount": 120,
+      "totalCount": 120
+    },
+    "src/pool/pools/MapPool.ts": {
+      "correctCount": 17,
+      "totalCount": 17
+    },
+    "src/index.ts": {
+      "correctCount": 6,
+      "totalCount": 6
+    }
+  },
+  "anys": [],
+  "percentage": 100,
+  "total": 154,
+  "covered": 154,
+  "uncovered": 0
+}

@@ -26,7 +26,8 @@
   "scripts": {
     "tsc": "tsc",
     "test": "bun test",
-    "build": "bun i && bun scripts/update-package.ts && rm -rf *.tsbuildinfo && rm -rf dist/*.* && bun run bundler/bundler.ts && bun run test && bun run build:declaration",
+    "coverage": "bun typescript-coverage-report",
+    "build": "bun i && bun scripts/update-package.ts && rm -rf *.tsbuildinfo && rm -rf dist/*.* && bun run bundler/bundler.ts && bun run test && bun run build:declaration && bun run coverage",
     "build:declaration": "tsc --emitDeclarationOnly --project tsconfig.types.json",
     "auto-publish": "npm explore @dobuki/auto-publish -- bun run auto-publish \"$(pwd)\""
   },
@@ -45,7 +46,8 @@
     "prettier": "^3.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "typescript-coverage-report": "^1.0.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
